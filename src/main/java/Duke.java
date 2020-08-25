@@ -20,25 +20,24 @@ public class Duke {
         line = in.nextLine().toLowerCase();
 
         //If bye was not inputted, ask for input again
-        while(!line.equals("bye")) {
+        while (!line.equals("bye")) {
             //If user inputted list, return list of items
-            if(line.equals("list")) {
-                for(int i = 0; i < noOfTask; i ++) {
+            if (line.equals("list")) {
+                for (int i = 0; i < noOfTask; i++) {
                     int listNumber = i + 1;
-                    System.out.println(listNumber + ".[" + list[i].getStatusIcon() + "] " + list[i].description);
+                    System.out.println(listNumber + ".[" + list[i].getStatusIcon()
+                                + "] " + list[i].description);
                 }
-            }
             //If user inputted done, then mark the task as done
-            else if(line.contains("done")) {
+            } else if (line.contains("done")) {
                 int divider = line.indexOf(" ");
-                String action = line.substring(0,divider);
-                int taskNumber = Integer.parseInt(line.substring(divider+1));
-                list[taskNumber-1].doneTask();
+                int taskNumber = Integer.parseInt(line.substring(divider + 1));
+                list[taskNumber - 1].setDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  [" + list[taskNumber-1].getStatusIcon() + "] " + list[taskNumber-1].description);
-            }
+                System.out.println("  [" + list[taskNumber - 1].getStatusIcon() + "] "
+                            + list[taskNumber - 1].description);
             //else print added statement and add the item to list
-            else {
+            } else {
                 System.out.println("added: " + line);
                 list[noOfTask] = new Task(line);
                 noOfTask ++;
