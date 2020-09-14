@@ -21,10 +21,10 @@ public class Duke {
         System.out.println("Hello! I'm Duke.Duke");
         System.out.println("What can I do for you?");
         userInput = in.nextLine();
-        int divider = userInput.indexOf(" ");
 
         //If bye was not inputted, ask for input again
         while (!userInput.equals("bye")) {
+            int divider = userInput.indexOf(" ");
 
             //If user inputted list, return list of items
             if (userInput.contains("list")) {
@@ -46,7 +46,11 @@ public class Duke {
             } else if (userInput.contains("event")) {
                 noOfTask = Event(userInput, noOfTask, divider);
 
-            //else print added statement and add the item to list
+            //If user inputted delete, then delete the item
+            } else if (userInput.contains("delete")) {
+                noOfTask = deleteTask(userInput, noOfTask, divider);
+
+            //Else, throw a random word exception
             } else {
                 new Exception("random", null);
             }
@@ -68,7 +72,7 @@ public class Duke {
 
         //If no error, run code to store event
         } else {
-            list.add(new Event(line.substring((divider + 1),
+            list.add(noOfTask, new Event(line.substring((divider + 1),
                     (dividerDate - 1)), line.substring(dividerDate + 4)));
             noOfTask++;
             System.out.println("Got it. I've added this task:");
@@ -90,7 +94,7 @@ public class Duke {
 
         //If no error, run code to store to do
         } else {
-            list.add(new Todo(line.substring(divider + 1)));
+            list.add(noOfTask, new Todo(line.substring(divider + 1)));
             noOfTask++;
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + list.get(noOfTask-1));
@@ -116,7 +120,7 @@ public class Duke {
 
         //If no error, run code to store deadline
         } else {
-            list.add(new Deadline(line.substring((divider + 1),
+            list.add(noOfTask, new Deadline(line.substring((divider + 1),
                     (dividerDate - 1)), line.substring(dividerDate + 4)));
             noOfTask++;
             System.out.println("Got it. I've added this task:");
@@ -140,7 +144,6 @@ public class Duke {
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
-                System.out.println("test1: " + line.substring(divider+1));
                 list.get(taskNumber-1).setDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + list.get(taskNumber-1));
@@ -150,6 +153,34 @@ public class Duke {
                 System.out.println("Please input the task number!");
             }
         }
+    }
+
+    private static int deleteTask(String line, int noOfTask, int divider) {
+
+        //Run description error
+        if (line.equals("delete") || line.equals("delete ")) {
+            new Exception("description", "delete");
+
+        //If no description error, run code to delete task
+        } else {
+            try {
+                int taskNumber = Integer.parseInt(line.substring(divider + 1));
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + list.get(taskNumber-1));
+                list.remove(taskNumber-1);
+                noOfTask --;
+                if ((noOfTask - 1) <= 0) {
+                    System.out.println("Now you have " + noOfTask + " task in the list.");
+                } else {
+                    System.out.println("Now you have " + noOfTask + " tasks in the list.");
+                }
+
+                //If no number is input, throw error
+            } catch (NumberFormatException e) {
+                System.out.println("Please input the task number!");
+            }
+        }
+        return noOfTask;
     }
 
     private static void listTask(int noOfTask) {
