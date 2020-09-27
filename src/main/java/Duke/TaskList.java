@@ -9,9 +9,6 @@ public class TaskList {
         list = inputList;
     }
 
-    public static int getTaskListSize() {
-        return list.size();
-    }
     public static int createEvent(String line, int noOfTask, int divider) {
         int dividerDate = line.indexOf("/");
 
@@ -20,11 +17,11 @@ public class TaskList {
                 || line.endsWith("/at") || line.endsWith("/at ")) {
             new Exception("description", "event");
 
-            //Run date error
+        //Run date error
         } else if (line.endsWith("/") || line.endsWith("/ ")) {
             new Exception("date", "event");
 
-            //If no error, run code to store event
+        //If no error, run code to store event
         } else {
             list.add(noOfTask, new Event(line.substring((divider + 1),
                     (dividerDate - 1)), line.substring(dividerDate + 4)));
@@ -46,7 +43,7 @@ public class TaskList {
         if (line.equals("todo") || line.equals("todo ")) {
             new Exception("description", "todo");
 
-            //If no error, run code to store to do
+        //If no error, run code to store to do
         } else {
             list.add(noOfTask, new Todo(line.substring(divider + 1)));
             noOfTask++;
@@ -68,12 +65,12 @@ public class TaskList {
         if (line.equals("deadline") || line.equals("deadline ")) {
             new Exception("description", "deadline");
 
-            //Run date error
+        //Run date error
         } else if (line.endsWith("/by") || line.endsWith("/by ")
                 || line.endsWith("/") || line.endsWith("/ ")) {
             new Exception("date", "deadline");
 
-            //If no error, run code to store deadline
+        //If no error, run code to store deadline
         } else {
             list.add(noOfTask, new Deadline(line.substring((divider + 1),
                     (dividerDate - 1)), line.substring(dividerDate + 4)));
@@ -89,13 +86,17 @@ public class TaskList {
         return noOfTask;
     }
 
-    public static void doneTask(String line, int divider) {
+    public static void doneTask(String line, int noOfTask, int divider) {
 
         //Run description error
         if (line.equals("done") || line.equals("done ")) {
             new Exception("description", "done");
 
-            //If no description error, run code to tick done
+        //Run empty list error
+        } else if (noOfTask == 0) {
+            new Exception("empty", null);
+
+        //If no description error, run code to tick done
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
@@ -103,7 +104,7 @@ public class TaskList {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + list.get(taskNumber-1));
 
-                //If no number is input, throw error
+            //If no number is input, throw error
             } catch (NumberFormatException e) {
                 System.out.println("Please input the task number!");
             }
@@ -116,7 +117,11 @@ public class TaskList {
         if (line.equals("delete") || line.equals("delete ")) {
             new Exception("description", "delete");
 
-            //If no description error, run code to delete task
+        //Run empty list error
+        } else if (noOfTask == 0) {
+            new Exception("empty", null);
+
+        //If no description error, run code to delete task
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
@@ -140,7 +145,7 @@ public class TaskList {
 
     public static void listTask(int noOfTask) {
 
-        //Run empty error
+        //Run empty list error
         if (noOfTask == 0) {
             new Exception("empty", null);
 

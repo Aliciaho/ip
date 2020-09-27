@@ -17,7 +17,7 @@ public class Parser {
 
             //If user inputted done, then mark the task as done
         } else if (userInput.contains("done")) {
-            doneTask(userInput, divider);
+            doneTask(userInput, noOfTask, divider);
 
             //If user inputted deadline, then add the task under deadline cat
         } else if (userInput.contains("deadline")) {
