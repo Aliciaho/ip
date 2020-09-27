@@ -1,6 +1,6 @@
 package Duke;
 
-public class Exception {
+public class Exception extends java.lang.Exception {
 
     public Exception (String type, String description) {
         switch (type) {
