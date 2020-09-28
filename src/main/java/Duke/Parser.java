@@ -15,26 +15,27 @@ public class Parser {
         if (userInput.contains("list")) {
             listTask(noOfTask);
 
-            //If user inputted done, then mark the task as done
+        //If user inputted done, then mark the task as done
         } else if (userInput.contains("done")) {
             doneTask(userInput, noOfTask, divider);
 
-            //If user inputted deadline, then add the task under deadline cat
+        //If user inputted deadline, then add the task under deadline cat
         } else if (userInput.contains("deadline")) {
             noOfTask = createDeadline(userInput, noOfTask, divider);
 
-            //If user inputted to do, then add the task under to do cat
+        //If user inputted to do, then add the task under to do cat
         } else if (userInput.contains("todo")) {
             noOfTask = createTodo(userInput, noOfTask, divider);
 
-            //If user inputted event, then add task under event cat
+        //If user inputted event, then add task under event cat
         } else if (userInput.contains("event")) {
             noOfTask = createEvent(userInput, noOfTask, divider);
 
-            //If user inputted delete, then delete the item
+        //If user inputted delete, then delete the item
         } else if (userInput.contains("delete")) {
             noOfTask = deleteTask(userInput, noOfTask, divider);
 
+        //If the user inputted find, then find the tasks with the relevant string
         } else if (userInput.contains("find")) {
             findTask(userInput, noOfTask, divider);
 

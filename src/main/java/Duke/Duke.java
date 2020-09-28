@@ -23,7 +23,7 @@ public class Duke {
             noOfTask = Parser.parseCommand(userInput, noOfTask);
             storage.updateTextFile();
         } while (!userInput.equals("bye"));
-
+        ui.showExitMessage();
     }
 
     public static void main(String[] args) {

@@ -122,7 +122,7 @@ public class TaskList {
         } else if (noOfTask == 0) {
             new Exception("empty", null);
 
-        //If no description error, run code to delete task
+        //If no error, run code to delete task
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
@@ -166,11 +166,11 @@ public class TaskList {
         if (noOfTask == 0) {
             new Exception("empty", null);
 
-            //Run description error
+        //Run description error
         } else if (line.equals("find") || line.equals("find ")) {
             new Exception("description", "find");
 
-            //If no error, run code to filter task
+        //If no error, run code to filter task
         } else {
             int index = 1;
             System.out.println("Here are the matching tasks in your list:");
