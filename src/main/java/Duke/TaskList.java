@@ -1,6 +1,8 @@
 package Duke;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     private static ArrayList<Task> list = new ArrayList<>();
@@ -23,8 +25,9 @@ public class TaskList {
 
         //If no error, run code to store event
         } else {
+            LocalDate date = LocalDate.parse(line.substring(dividerDate + 4));
             list.add(noOfTask, new Event(line.substring((divider + 1),
-                    (dividerDate - 1)), line.substring(dividerDate + 4)));
+                    (dividerDate - 1)), date);
             noOfTask++;
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + list.get(noOfTask-1));
