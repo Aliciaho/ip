@@ -10,8 +10,6 @@ public class Duke {
         ui = new Ui();
         storage.createTextFile();
         tasks = new TaskList(storage.readTextFile(0));
-        //ui.showLoadingError();
-        //tasks = new TaskList(new ArrayList<>());
     }
 
     public void run() {
@@ -23,7 +21,7 @@ public class Duke {
             noOfTask = Parser.parseCommand(userInput, noOfTask);
             storage.updateTextFile();
         } while (!userInput.equals("bye"));
-
+        ui.showExitMessage();
     }
 
     public static void main(String[] args) {

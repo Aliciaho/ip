@@ -2,6 +2,9 @@ package Duke;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
+
 public class TaskList {
     private static ArrayList<Task> list = new ArrayList<>();
 
@@ -96,7 +99,7 @@ public class TaskList {
         } else if (noOfTask == 0) {
             new Exception("empty", null);
 
-        //If no description error, run code to tick done
+        //If no error, run code to tick done
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
@@ -121,7 +124,7 @@ public class TaskList {
         } else if (noOfTask == 0) {
             new Exception("empty", null);
 
-        //If no description error, run code to delete task
+        //If no error, run code to delete task
         } else {
             try {
                 int taskNumber = Integer.parseInt(line.substring(divider + 1));
@@ -135,7 +138,7 @@ public class TaskList {
                     System.out.println("Now you have " + noOfTask + " tasks in the list.");
                 }
 
-                //If no number is input, throw error
+            //If no number is input, throw error
             } catch (NumberFormatException e) {
                 System.out.println("Please input the task number!");
             }
@@ -158,4 +161,35 @@ public class TaskList {
             }
         }
     }
+
+    public static void findTask(String line, int noOfTask, int divider) {
+
+        //Run empty list error
+        if (noOfTask == 0) {
+            new Exception("empty", null);
+
+        //Run description error
+        } else if (line.equals("find") || line.equals("find ")) {
+            new Exception("description", "find");
+
+        //If no error, run code to filter task
+        } else {
+            int index = 1;
+            System.out.println("Here are the matching tasks in your list:");
+            for(Task t: filterByString(list,line.substring(divider+1))) {
+                System.out.println(index + "." + t);
+                index ++;
+            }
+
+        }
+    }
+
+    public static ArrayList<Task> filterByString(ArrayList<Task> tasksData, String filterString) {
+        ArrayList<Task> filterTaskList = (ArrayList<Task>)tasksData.stream()
+                .filter((s) -> s.getDescription().contains(filterString))
+                .collect(toList());
+
+        return filterTaskList;
+    }
+
 }

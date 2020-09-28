@@ -1,5 +1,7 @@
 package Duke;
 
+import java.util.Collection;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -15,5 +17,9 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
