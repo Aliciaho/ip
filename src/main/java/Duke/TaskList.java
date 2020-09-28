@@ -1,6 +1,7 @@
 package Duke;
 
 import java.util.ArrayList;
+import static java.util.stream.Collectors.toList;
 
 public class TaskList {
     private static ArrayList<Task> list = new ArrayList<>();
@@ -157,5 +158,35 @@ public class TaskList {
                 System.out.println(listNumber + "." + list.get(i));
             }
         }
+    }
+
+    public static void findTask(String line, int noOfTask, int divider) {
+
+        //Run empty list error
+        if (noOfTask == 0) {
+            new Exception("empty", null);
+
+            //Run description error
+        } else if (line.equals("find") || line.equals("find ")) {
+            new Exception("description", "find");
+
+            //If no error, run code to filter task
+        } else {
+            int index = 1;
+            System.out.println("Here are the matching tasks in your list:");
+            for(Task t: filterByString(list,line.substring(divider+1))) {
+                System.out.println(index + "." + t);
+                index ++;
+            }
+
+        }
+    }
+
+    public static ArrayList<Task> filterByString(ArrayList<Task> tasksData, String filterString) {
+        ArrayList<Task> filterTaskList = (ArrayList<Task>)tasksData.stream()
+                .filter((s) -> s.getDescription().contains(filterString))
+                .collect(toList());
+
+        return filterTaskList;
     }
 }

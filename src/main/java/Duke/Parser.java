@@ -35,7 +35,10 @@ public class Parser {
         } else if (userInput.contains("delete")) {
             noOfTask = deleteTask(userInput, noOfTask, divider);
 
-            //Else, throw a random word exception
+        } else if (userInput.contains("find")) {
+            findTask(userInput, noOfTask, divider);
+
+        //If user inputted bye, return 0 and break out of loop
         } else if(userInput.equals("bye")) {
             return 0;
 
