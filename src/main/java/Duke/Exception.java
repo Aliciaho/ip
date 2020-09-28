@@ -1,7 +1,17 @@
 package Duke;
 
+/**
+ * To configure the different types of error messages
+ * for their respective errors
+ */
 public class Exception extends java.lang.Exception {
 
+    /**
+     * To sort and print out the respective error messages
+     *
+     * @param type type of error it falls under
+     * @param description to indicate what kind of task the error falls under e.g event
+     */
     public Exception (String type, String description) {
         switch (type) {
             case "description":

@@ -7,12 +7,21 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This programme is to create a text file named duke.txt
+ * and also reads the text inside the file
+ * and store it to a ArrayList
+ * If the user inputs more tasks to the ArrayList, the file will be updated accordingly
+ */
 public class Storage {
     private static String PATH = new File("").getAbsolutePath();
     File filePath = new File(PATH + "/duke.txt");
     private static ArrayList<Task> list = new ArrayList<>();
 
-
+    /**
+     * Used to create a new text file from the file path described above
+     * @throws IOException if file is not found
+     */
     public void createTextFile() {
         try {
             this.filePath.createNewFile();
@@ -21,6 +30,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the ArrayList list after inputting the tasks from text file.
+     * Reads in the tasks in the text file stored from  previous uses
+     * and store them in the ArrayList list.
+     *
+     * @param noOfTask number of task in the current list
+     * @return list which stores in the tasks in the text file
+     * @throws IOException if file is not found
+     */
     public ArrayList<Task> readTextFile(int noOfTask) {
         try {
             // create a Scanner using the File as the source
@@ -50,10 +68,15 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-
         return list;
     }
 
+    /**
+     * Reads in the new tasks inputted in the ArrayList list
+     * and stores them in the text file.
+     *
+     * @throws IOException if there is an error writing to the file
+     */
     public void updateTextFile() {
         FileWriter fw;
         try {
